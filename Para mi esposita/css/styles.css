@@ -1,0 +1,169 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url('https://wallpaperaccess.com/full/3167520.jpg'); /* Fondo personalizado */
+    background-size: cover;
+    background-position: center;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+    position: relative;
+}
+
+.carta {
+    position: relative;
+    width: 300px;
+    height: 350px; /* Aumenté la altura para acomodar mejor el texto */
+    cursor: pointer;
+    perspective: 1000px;
+}
+
+.sobre {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #9B1B30; /* Rojo vino para el sobre */
+    border-radius: 10px;
+    border: 3px solid #8B5E3C;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5); /* Sombra más marcadas */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    transition: transform 1s ease-in-out, box-shadow 0.3s ease;
+    background-image: url('https://cdn.pixabay.com/photo/2018/03/29/18/44/craft-3267320_960_720.jpg'); /* Fondo tipo papel kraft */
+    background-size: cover;
+}
+
+.tapa {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 50%;
+    background: #C98F52;
+    clip-path: polygon(0 0, 100% 0, 50% 100%); /* Forma de la tapa más realista */
+    transform-origin: center top;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Sombra en la tapa */
+    transition: transform 1s ease-in-out;
+    background-image: url('https://cdn.pixabay.com/photo/2018/03/29/18/44/craft-3267320_960_720.jpg'); /* Fondo de tapa con textura */
+    background-size: cover;
+    background-position: center;
+}
+
+.sello {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 40px;
+    color: #C98F52;
+    z-index: 3;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+    background-color: #B94D4B; /* Color del sello */
+    border-radius: 50%;
+    padding: 15px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.sello::before {
+    content: '❤️'; /* Corazón en el centro del sello */
+    font-size: 30px;
+    color: #F2E5E1;
+}
+
+.nota {
+    position: absolute;
+    width: 280px;
+    height: 180px;
+    background: white;
+    border-radius: 5px;
+    padding: 15px;
+    text-align: left; /* Ajustamos la alineación para mejor presentación */
+    font-size: 12px; /* Ajuste de tamaño de fuente para mejor encaje */
+    transform: translateY(50px);
+    visibility: hidden;
+    z-index: 2;
+    transition: transform 1s ease-in-out, visibility 0.5s ease;
+    overflow-y: auto; /* Permite desplazamiento si el contenido es muy largo */
+}
+
+.carta.abierta .tapa {
+    transform: rotateX(180deg); /* La tapa del sobre se abre hacia abajo */
+}
+
+.carta.abierta .sobre {
+    transform: scale(0.85) translateY(-60px); /* El sobre se reduce y se mueve hacia abajo */
+    box-shadow: 15px 15px 25px rgba(0, 0, 0, 0.8); /* Sombra más profunda cuando se abre */
+}
+
+.carta.abierta .nota {
+    visibility: visible;
+    transform: translateY(-150px); /* La carta se mueve hacia arriba */
+}
+
+.carta.cerrada .nota {
+    transform: translateY(50px);
+    visibility: hidden;
+}
+
+.carta.cerrada .sello {
+    opacity: 0;
+}
+
+.animaciones {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 4; /* Asegura que las animaciones aparezcan encima del sobre */
+}
+
+.flotando {
+    position: absolute;
+    font-size: 20px;
+    animation: subir 5s linear infinite;
+}
+
+@keyframes subir {
+    0% { transform: translateY(100vh); opacity: 1; }
+    100% { transform: translateY(-10vh); opacity: 0; }
+}
+
+.gif-izquierda-arriba, .gif-derecha-abajo, .gif-arriba-derecha, .gif-abajo-izquierda {
+    position: absolute;
+    width: 100px; /* GIF más grande */
+    height: 100px;
+    z-index: 5;
+}
+
+.gif-izquierda-arriba {
+    top: 20px;
+    left: 20px;
+}
+
+.gif-derecha-abajo {
+    bottom: 20px;
+    right: 20px;
+}
+
+.gif-arriba-derecha {
+    top: 30px;
+    right: 50px;
+}
+
+.gif-abajo-izquierda {
+    bottom: 30px;
+    left: 50px;
+}
+
+/* Imágenes de los GIFs */
+.gif-izquierda-arriba img,
+.gif-derecha-abajo img,
+.gif-arriba-derecha img,
+.gif-abajo-izquierda img {
+    width: 100%;
+    height: 100%;
+}
